@@ -2,8 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
 import { env } from './utils/env.js';
-import { ContactCollection } from './db/models/Contact.js';
-// import * as contactServices from './services/contacts.js';
+import * as contactServices from './services/contacts.js';
 
 export const setupServer = () => {
   const app = express();
@@ -18,8 +17,8 @@ export const setupServer = () => {
   app.use(cors());
   app.use(express.json());
 
-  app.use('/contacts', async (req, res) => {
-    const data = await ContactCollection.find();
+  app.get('/contacts', async (req, res) => {
+    const data = await contactServices.getAllContacts();
 
     res.json({
       status: 200,
@@ -27,6 +26,10 @@ export const setupServer = () => {
       data,
     });
   });
+
+  // app.get('/contacts/:id', async (req, res) => {
+  //   console.log(req.params);
+  // });
 
   app.use((req, res) => {
     res.status(404).json({
@@ -42,5 +45,5 @@ export const setupServer = () => {
 
   const port = Number(env('PORT', 3000));
 
-  app.listen((port, () => console.log(`'Server is running on port ${port}'`)));
+  app.listen(port, () => console.log(`'Server is running on port ${port}'`));
 };
