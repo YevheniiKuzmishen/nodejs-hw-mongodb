@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 const contactShema = new Schema(
   {
-    mame: {
+    name: {
       type: String,
       required: true,
     },
