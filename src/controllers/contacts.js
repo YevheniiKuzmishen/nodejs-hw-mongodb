@@ -13,7 +13,7 @@ export const getAllContactsController = async (req, res) => {
 };
 
 export const getContactByIdController = async (req, res, next) => {
-  const id = req.params;
+  const { id } = req.params;
   const data = await getContactById(id);
 
   if (!data) {
