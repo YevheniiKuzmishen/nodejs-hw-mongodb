@@ -20,3 +20,6 @@ export const uptadeContact = async (filter, data, options = {}) => {
     isNew: Boolean(rawResult.lastErrorObject?.upserted),
   };
 };
+
+export const deleteContact = (filter) =>
+  ContactCollection.findOneAndDelete(filter);

@@ -1,5 +1,6 @@
 import {
   createContact,
+  deleteContact,
   getAllContacts,
   getContactById,
   uptadeContact,
@@ -54,4 +55,30 @@ export const upsertContactController = async (req, res) => {
     message: 'Contact upsert successfully',
     data,
   });
+};
+
+export const patchContactController = async (req, res) => {
+  const { id } = req.params;
+  const result = await uptadeContact({ _id: id }, req.body);
+
+  if (!result) {
+    throw createHttpError(404, `Contact with ID ${id} not found`);
+  }
+
+  res.json({
+    status: 200,
+    message: `Contact by id ${id} patched successfully!`,
+    data: result.data,
+  });
+};
+
+export const deleteContactController = async (req, res) => {
+  const { id } = req.params;
+  const data = await deleteContact({ _id: id });
+
+  if (!data) {
+    throw createHttpError(404, `Contact with ID ${id} not found`);
+  }
+
+  res.status(204).send();
 };
