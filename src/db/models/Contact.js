@@ -2,11 +2,11 @@ import { Schema, model } from 'mongoose';
 
 import { contactTypeEnum } from '../../constans/contacts.js';
 
-const contactShema = new Schema(
+const contactSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: [true, 'name must be exist'],
     },
     phoneNumber: {
       type: String,
@@ -28,4 +28,9 @@ const contactShema = new Schema(
   { timestamps: true, versionKey: false },
 );
 
-export const ContactCollection = model('contacts', contactShema);
+contactSchema.post('save', (error, doc, next) => {
+  error.status = 400;
+  next();
+});
+
+export const ContactCollection = model('contacts', contactSchema);
