@@ -1,12 +1,22 @@
 import Joi from 'joi';
 import { contactTypeEnum } from '../constans/contacts.js';
+import { stringValidation } from '../constans/contacts.js';
 
-export const contactAddShema = Joi.object({
-  name: Joi.string().required(),
-  phoneNumber: Joi.string().required(),
-  emmail: Joi.string(),
-  isFavourite: Joi.boolean().required(),
-  contactType: Joi.string()
+export const contactAddSchema = Joi.object({
+  name: stringValidation.required(),
+  phoneNumber: stringValidation.required(),
+  email: stringValidation.email(),
+  isFavourite: Joi.boolean().required().default(false),
+  contactType: stringValidation
     .valid(...contactTypeEnum)
-    .required(),
+    .required()
+    .default('personal'),
+});
+
+export const contactPatchSchema = Joi.object({
+  name: stringValidation,
+  phoneNumber: stringValidation,
+  email: stringValidation.email(),
+  isFavourite: Joi.boolean().default(false),
+  contactType: stringValidation.valid(...contactTypeEnum).default('personal'),
 });
