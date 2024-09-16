@@ -13,7 +13,7 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../utils/validateBody.js';
 import {
   contactAddSchema,
-  // contactPatchSchema,
+  contactPatchSchema,
 } from '../validation/contacts.js';
 
 export const contactsRouter = Router();
@@ -28,7 +28,7 @@ contactsRouter.get(
 
 contactsRouter.post(
   '/contacts',
-  // validateBody(contactAddSchema),
+  validateBody(contactAddSchema),
   ctrlWrapper(addContactController),
 );
 
@@ -42,7 +42,7 @@ contactsRouter.put(
 contactsRouter.patch(
   '/contacts/:id',
   isValidId,
-  // validateBody(contactPatchSchema),
+  validateBody(contactPatchSchema),
   ctrlWrapper(patchContactController),
 );
 
