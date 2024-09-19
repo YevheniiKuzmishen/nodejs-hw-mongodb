@@ -1,11 +1,12 @@
 import Joi from 'joi';
 import { contactTypeEnum } from '../constans/contacts.js';
 import { stringValidation } from '../constans/contacts.js';
+import { emailRegexp } from '../constans/users.js';
 
 export const contactAddSchema = Joi.object({
   name: stringValidation.required(),
   phoneNumber: stringValidation.required(),
-  email: stringValidation.email(),
+  email: stringValidation.pattern(emailRegexp),
   isFavourite: Joi.boolean().required().default(false),
   contactType: stringValidation
     .valid(...contactTypeEnum)
