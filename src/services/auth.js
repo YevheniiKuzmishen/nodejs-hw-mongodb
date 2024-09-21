@@ -54,3 +54,10 @@ export const signin = async (payload) => {
 
   return userSession;
 };
+
+export const findSessionByAccessToken = (accessToken) =>
+  SessionCollection.findOne({ accessToken });
+
+export const findUser = (filter) => {
+  return UserCollection.findOne(filter);
+};
