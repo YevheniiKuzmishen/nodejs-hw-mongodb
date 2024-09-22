@@ -6,6 +6,7 @@ import {
   signupController,
   signinController,
   refreshController,
+  signoutController,
 } from '../controllers/auth.js';
 
 export const authRouter = Router();
@@ -23,3 +24,5 @@ authRouter.post(
 );
 
 authRouter.post('/refresh', ctrlWrapper(refreshController));
+
+authRouter.post('/signout', ctrlWrapper(signoutController));

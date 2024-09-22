@@ -70,6 +70,10 @@ export const findUser = (filter) => {
   return UserCollection.findOne(filter);
 };
 
+export const signout = async (sessionId) => {
+  await SessionCollection.deleteOne({ _id: sessionId });
+};
+
 export const refreshSession = async ({ refreshToken, sessionId }) => {
   const oldSession = await SessionCollection.findOne({
     _id: sessionId,
