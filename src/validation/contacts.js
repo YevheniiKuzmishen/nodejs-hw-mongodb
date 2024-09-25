@@ -7,7 +7,7 @@ export const contactAddSchema = Joi.object({
   name: stringValidation.required(),
   phoneNumber: stringValidation.required(),
   email: stringValidation.pattern(emailRegexp),
-  isFavourite: Joi.boolean().required().default(false),
+  isFavourite: Joi.boolean().default(false),
   contactType: stringValidation
     .valid(...contactTypeEnum)
     .required()
