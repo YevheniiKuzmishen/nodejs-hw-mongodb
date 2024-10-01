@@ -50,14 +50,15 @@ export const getContactByIdController = async (req, res) => {
 };
 
 export const addContactController = async (req, res) => {
-  const { _id: userId } = req.user;
-
-  const data = await createContact({ ...req.body, userId });
-  res.status(201).json({
-    status: 201,
-    message: 'Contact add successfully',
-    data,
-  });
+  console.log(req.body);
+  console.log(req.file);
+  // const { _id: userId } = req.user;
+  // const data = await createContact({ ...req.body, userId });
+  // res.status(201).json({
+  //   status: 201,
+  //   message: 'Contact add successfully',
+  //   data,
+  // });
 };
 
 export const upsertContactController = async (req, res) => {
