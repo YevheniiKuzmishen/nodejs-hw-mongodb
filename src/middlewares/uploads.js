@@ -7,8 +7,8 @@ const storage = multer.diskStorage({
   destination: TEMP_UPLOAD_DIR,
   filename: (req, file, callback) => {
     const uniquePrefix = `${Date.now()}_${Math.round(Math.random() * 1e9)}`;
-    const extension = path.extname(file.originalname); // отримуємо розширення файлу
-    const filename = `${uniquePrefix}${extension}`; // додаємо розширення до назви файлу
+    const extension = path.extname(file.originalname);
+    const filename = `${uniquePrefix}${extension}`;
     callback(null, filename);
   },
 });
