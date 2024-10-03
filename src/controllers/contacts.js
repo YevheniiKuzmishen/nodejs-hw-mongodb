@@ -75,6 +75,17 @@ export const addContactController = async (req, res) => {
 };
 
 export const upsertContactController = async (req, res) => {
+  let photo;
+
+  if (req.file) {
+    if (enableClaudinary === 'true') {
+      photo = await saveFileToCloudinary(req.file, 'photos');
+    } else {
+      photo = await saveFileToUploadDir(req.file);
+    }
+    req.body.photo = photo;
+  }
+
   const { id } = req.params;
   const { _id: userId } = req.user;
   const { isNew, data } = await uptadeContact({ _id: id, userId }, req.body, {
@@ -91,6 +102,17 @@ export const upsertContactController = async (req, res) => {
 };
 
 export const patchContactController = async (req, res) => {
+  let photo;
+
+  if (req.file) {
+    if (enableClaudinary === 'true') {
+      photo = await saveFileToCloudinary(req.file, 'photos');
+    } else {
+      photo = await saveFileToUploadDir(req.file);
+    }
+    req.body.photo = photo;
+  }
+
   const { id } = req.params;
   const { _id: userId } = req.user;
   const result = await uptadeContact({ _id: id, userId }, req.body);
